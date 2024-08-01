@@ -392,12 +392,13 @@ The prior-matching term $\text{KL}(q\_\phi(\mathbf{z}|\mathbf{x}) || p(\mathbf{z
 
 class: middle
 
-## Some selected applications
+## Illustrative applications
 
 .center[
 .width-90[![](figures/lec11/generative-compression.png)]
 
 Hierarchical .bold[compression of images and other data],<br> e.g., in video conferencing systems (Gregor et al, 2016).
+
 ]
 
 ---
@@ -670,20 +671,37 @@ In other words, controllable generation can be achieved by adding a conditioning
 
 class: middle
 
-## Some selected applications
+## Illustrative applications
 
-(placeholder)
-https://arxiv.org/abs/2206.11898
+.width-100[![](figures/diffusion-calo.png)]
+
+.center[
+Diffusion models for .bold[calorimeter shower simulation] (Mikuni and Nachman, 2022)
+]
+
+.footnote[Credits: [Mikuni and Nachman](https://arxiv.org/abs/2206.11898), 2022.]
 
 ---
 
-(placeholder)
-https://academic.oup.com/mnrasl/article/527/1/L173/7313644
+class: middle
+
+.center.width-100[![](figures/adam22.png)]
+
+.center[Posterior samples of .bold[source galaxies in strong gravitational lenses] with score-based priors (Adam et al, 2022).]
+
+.footnote[Credits: [Adam et al](https://arxiv.org/abs/2211.03812), 2022.]
 
 ---
 
-(placeholder)
-sda
+class: middle
+
+.center[.width-70[![](figures/rozet-sda.svg)] 
+
+.width-80[![](figures/rozet-results.svg)]]
+
+.center[.bold[Data assimilation] in large-scale dynamical systems (Rozet and Louppe, 2023).]
+
+.footnote[Credits: [Rozet and Louppe](https://arxiv.org/abs/2306.10574), 2023.]
 
 ---
 
@@ -693,34 +711,121 @@ class: middle
 
 ---
 
-(placeholder)
-tiger slide 1, 2, 3
+class: middle, black-slide
+background-image: url(figures/tiger1.png)
+background-size: contain
+
+.footnote[Credits: [Kreis, Gao, and Vahdat](https://neurips2023-ldm-tutorial.github.io/), 2023.]
 
 ---
 
-(placeholder)
-compression/encoding in diffusion models
+count: false
+class: middle, black-slide
+background-image: url(figures/tiger2.png)
+background-size: contain
+
+.footnote[Credits: [Kreis, Gao, and Vahdat](https://neurips2023-ldm-tutorial.github.io/), 2023.]
 
 ---
 
-(placeholder)
-architecture and training
+count: false
+class: middle, black-slide
+background-image: url(figures/tiger3.png)
+background-size: contain
+
+.footnote[Credits: [Kreis, Gao, and Vahdat](https://neurips2023-ldm-tutorial.github.io/), 2023.]
 
 ---
 
 class: middle
 
-## Some selected applications
+.center.width-100[![](figures/compression1.png)]
 
-(placeholder1)
+.center[Diffusion models encode images in their noisy latent space.]
+
+.footnote[Credits: [Kreis, Gao, and Vahdat](https://neurips2023-ldm-tutorial.github.io/), 2023.]
+
+???
+
+Check https://neurips.cc/virtual/2023/tutorial/73957
+
+- Rate: how much information is preserved about the input. 
+- Distortion: how much the reconstruction differs from the clean input.
 
 ---
 
-(placeholder2)
+class: middle
+count: false
+
+.center.width-100[![](figures/compression2.png)]
+
+.center[However, to encode each little detail, a lot of capacity is needed.]
+
+.footnote[Credits: [Kreis, Gao, and Vahdat](https://neurips2023-ldm-tutorial.github.io/), 2023.]
 
 ---
 
-(placeholder) https://www.biorxiv.org/content/10.1101/2023.08.22.554145v2.full
+class: middle
+
+## Latent diffusion models
+
+Latent diffusion models (LDMs) are made of two components:
+- A strong auto-encoder ($\mathcal{E}$ and $\mathcal{D}$) that maps data to a latent space and back.
+- An efficient diffusion model that generates data in the latent space.
+
+.center.width-90[![](figures/ldm.png)]
+
+.footnote[Credits: [Kreis, Gao, and Vahdat](https://neurips2023-ldm-tutorial.github.io/), 2023.]
+
+---
+
+class: middle
+
+The advantages of LDMs over diffusion models are:
+- A .bold[compressed latent space]. Training a diffusion model in a lower-dimensional latent space is computationally more efficient.
+- A .bold[regularized latent space]. The latent space is trained to be simple, making the diffusion process easier to reverse and faster to sample from.
+- .bold[Flexibility]. The auto-encoder can be tailored to data (images, text, graphs, point clouds, meshes, etc.) and the desired application.
+
+---
+
+class: middle
+
+## Latent space regularization
+
+Option 1: KL regularization, as in VAEs.
+
+- $q\_{\mathcal{E}}(\mathbf{z} | \mathbf{x})$ is a Gaussian distribution.
+- Prior matching penalty $\text{KL}(q\_{\mathcal{E}}(\mathbf{z} | \mathbf{x}) || \mathcal{N}(\mathbf{0}, \mathbf{I}))$.
+
+Option 2: Vector quantization regularization, as in VQ-VAEs.
+
+- Discretize the latent space into a codebook.
+
+.center.width-90[![](figures/vqgan.png)]
+
+.footnote[Credits: [Kreis, Gao, and Vahdat](https://neurips2023-ldm-tutorial.github.io/), 2023.]
+
+---
+
+class: middle
+
+## Illustrative applications
+
+.center.width-90[![](figures/emu.png)]
+
+.center[Text-to-image generation with Emu (Dai et al, 2023).]
+
+.footnote[Credits: [Dai et al](https://arxiv.org/pdf/2309.15807), 2023.]
+
+---
+
+class: middle
+
+.center.width-100[![](figures/geomldm.png)]
+
+.center[Geometric latent diffusion models for .bold[3d molecule generation] (Xu et al, 2023).]
+
+.footnote[Credits: [Xu et al](https://arxiv.org/abs/2305.01140), 2023.]
 
 ---
 
@@ -784,7 +889,7 @@ The determinant of the Jacobian matrix of f at z has a geometric interpretation 
 
 class: middle
 
-## Example: coupling layers 
+## Example: affine coupling layers 
 
 Assume $\mathbf{z} = (\mathbf{z}\_a, \mathbf{z}\_b)$ and $\mathbf{x} = (\mathbf{x}\_a, \mathbf{x}\_b)$. Then,
 - Forward mapping $\mathbf{x} = f(\mathbf{z})$: 
@@ -793,10 +898,6 @@ $$\mathbf{x}\_a = \mathbf{z}\_a, \quad \mathbf{x}\_b = \mathbf{z}\_b \odot \exp(
 $$\mathbf{z}\_a = \mathbf{x}\_a, \quad \mathbf{z}\_b = (\mathbf{x}\_b - t(\mathbf{x}\_a)) \odot \exp(-s(\mathbf{x}\_a)),$$
 
 where $s$ and $t$ are arbitrary neural networks.
-
-???
-
-XXX: Rewrite the equations as in NSF.
 
 ---
 
@@ -811,11 +912,6 @@ such that $\left| \det J\_f(\mathbf{z}) \right| = \prod\_i \exp(s(\mathbf{z}\_a)
 
 Therefore, the log-likelihood is
 $$\begin{aligned}\log p(\mathbf{x}) &= \log p(\mathbf{z}) - \sum\_i s(\mathbf{z}\_a)\_i\end{aligned}$$
-
----
-
-(placeholder)
-instantiate previous notations into additive coupling layers and spline flows
 
 ---
 

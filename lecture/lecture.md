@@ -51,7 +51,8 @@ Formally, a generative model defines a probability distribution $p\_\theta(\math
 
 ???
 
-Our goal is to learn $\theta$ to match the (unknown) data distribution $p(\mathbf{x})$.
+- Our goal is to learn $\theta$ to match the (unknown) data distribution $p(\mathbf{x})$.
+- This is a challenging problem in high-dimensional spaces, where the data distribution is often complex and multimodal.
 
 ---
 
@@ -227,7 +228,7 @@ Examples include:
 
 class: middle, black-slide
 
-.center[<video controls autoplay loop muted preload="auto" height="480" width="640">
+.center[<video controls autoplay loop muted preload="auto" height="640" width="640">
   <source src="./figures/lec11/galton.mp4" type="video/mp4">
 </video>]
 
@@ -245,6 +246,18 @@ sampling from $p\_\theta(\mathbf{x}|\mathbf{z})$ can be interpreted as **a stoch
 --
 
 count: false
+
+$$\begin{aligned}
+\theta^{\*} &= \arg \max\_\theta p\_\theta(\mathbf{x})
+\end{aligned}$$
+
+---
+
+count: false
+
+<br><br><br>
+
+## How to fit a latent variable model?
 
 $$\begin{aligned}
 \theta^{\*} &= \arg \max\_\theta p\_\theta(\mathbf{x}) \\\\
@@ -572,10 +585,10 @@ class: middle
 
 $$\begin{aligned}
 &\arg \min\_\theta L\_{t-1} \\\\
-=&\arg \min\_\theta \mathbb{E}\_{q(\mathbf{x}\_t | \mathbf{x}\_0)} \frac{1}{2\sigma^2\_t} \frac{(1-\alpha\_t)^2}{\alpha\_t} || s\_\theta(\mathbf{x}\_t, t) - \nabla\_{\mathbf{x}\_t}  \log q(\mathbf{x}\_t | \mathbf{x}\_0) ||_2^2
+=&\arg \min\_\theta \mathbb{E}\_{q(\mathbf{x}\_t | \mathbf{x}\_0)} \frac{1}{2\sigma^2\_t} \frac{(1-\alpha\_t)^2}{\alpha\_t} || s\_\theta(\mathbf{x}\_t, t) - \nabla\_{\mathbf{x}\_t}  \log q(\mathbf{x}\_t) ||_2^2
 \end{aligned}$$
 
-.success[.italic[Interpretation 3: Denoising score matching.] Training a diffusion model amounts to learning a neural network that predicts the score $\nabla\_{\mathbf{x}\_t} \log q(\mathbf{x}\_t | \mathbf{x}\_0)$  of the tractable posterior.]
+.success[.italic[Interpretation 3: Denoising score matching.] Training a diffusion model amounts to learning a neural network that predicts the score $\nabla\_{\mathbf{x}\_t} \log q(\mathbf{x}\_t)$.]
 
 ???
 
@@ -589,6 +602,15 @@ $$\begin{aligned}
 \mu\_q(\mathbf{x}\_t, \mathbf{x}\_0, t) &= \frac{\sqrt{\alpha\_t}(1-\bar{\alpha}\_{t-1})}{1-\bar{\alpha}\_t}\mathbf{x}\_t + \frac{\sqrt{\bar{\alpha}\_{t-1}}(1-\alpha\_t)}{1-\bar{\alpha}\_t}\mathbf{x}\_0 \\\\
 \sigma^2\_t &= \frac{(1-\alpha\_t)(1-\bar{\alpha}\_{t-1})}{1-\bar{\alpha}\_t}
 \end{aligned}$$
+
+---
+
+class: middle
+
+Unfortunately, $\nabla\_{\mathbf{x}\_t} \log q(\mathbf{x}\_t)$ is not tractable in general. 
+However, since $s\_\theta(\mathbf{x}\_t, t)$ is learned in expectation over the data distribution $q(\mathbf{x}\_0)$, minimizing instead
+$$\mathbb{E}\_{q(\mathbf{x}\_0)} \mathbb{E}\_{q(\mathbf{x}\_t | \mathbf{x}\_0)} \frac{1}{2\sigma^2\_t} \frac{(1-\alpha\_t)^2}{\alpha\_t} || s\_\theta(\mathbf{x}\_t, t) - \nabla\_{\mathbf{x}\_t}  \log q(\mathbf{x}\_t | \mathbf{x}\_0) ||\_2^2$$
+ensures that $s\_\theta(\mathbf{x}\_t, t) \approx \nabla\_{\mathbf{x}\_t} \log q(\mathbf{x}\_t)$.
 
 ---
 

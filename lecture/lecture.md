@@ -1,7 +1,7 @@
 class: middle, center, title-slide
 
 # Deep generative models
-.italic[A latent variable model perspective]
+## A latent variable model perspective
 
 <br>
 
@@ -12,13 +12,20 @@ August 5, 2024
 
 Gilles Louppe<br>
 [g.louppe@uliege.be](mailto:g.louppe@uliege.be)<br>
-[@glouppe](https://twitter.com/glouppe)
 
 ???
 
 Abstract:
 
 Deep generative models are probabilistic models that can be used as simulators of the data. They are used to generate samples, perform inference, and encode complex priors. In this lecture, we will review the principles of deep generative models from the unified perspective of latent variable models, covering variational auto-encoders, diffusion models, latent diffusion models, and normalizing flows. We will discuss the principles of variational inference, the training of generative models, and the interpretation of the latent space. Selected applications from scientific domains will be presented.
+
+---
+
+class: middle, center
+
+Slides, helpful resources, and tutorials can all be found at
+
+[https://github.com/glouppe/iaifi-summer-school-2024](https://github.com/glouppe/iaifi-summer-school-2024). 
 
 ---
 
@@ -435,6 +442,32 @@ class: middle
 
 ---
 
+class: middle, black-slide
+
+.grid[
+.kol-1-2.center[
+
+<br><br><br><br>
+
+## Questions?
+
+Ask me anything!
+
+]
+.kol-1-2.center[<iframe src="https://giphy.com/embed/3ohc17IuNgUpALSaIM" width="270" height="480" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>]
+]
+
+---
+
+class: middle, center
+count: false
+
+5-minute break
+
+<iframe src="https://giphy.com/embed/m2zntg8ZJ3Y88" width="480" height="480" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+---
+
 class: middle
 count: false
 
@@ -727,6 +760,33 @@ class: middle
 
 ---
 
+class: middle, black-slide
+
+.grid[
+.kol-1-2.center[
+
+<br><br><br>
+
+## Questions?
+
+Ask me anything!
+
+]
+.kol-1-2.center.width-100[![](figures/confused.gif)]
+]
+
+---
+
+class: middle, center
+count: false
+
+5-minute break
+
+<iframe src="https://giphy.com/embed/m2zntg8ZJ3Y88" width="480" height="480" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+
+---
+
 class: middle
 
 # Latent diffusion models
@@ -769,10 +829,10 @@ class: middle
 
 ???
 
-Check https://neurips.cc/virtual/2023/tutorial/73957
-
 - Rate: how much information is preserved about the input. 
 - Distortion: how much the reconstruction differs from the clean input.
+
+Low distortion can be achieved even with high compression rates. A lot capacity is needed to encode the last details.
 
 ---
 

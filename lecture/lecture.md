@@ -88,6 +88,10 @@ Diffusion models<br>
 ]
 ]
 
+???
+
+Over 10 years, the field of deep generative models has seen a rapid development, with a variety of models and applications. The quality of the generated samples has improved significantly, most notably in the last few years with models like latent diffusion models. 
+
 ---
 
 class: black-slide
@@ -95,6 +99,12 @@ background-image: url(./figures/landscape.png)
 background-size: contain
 
 .footnote[Credits: [Karsten et al](https://cvpr2022-tutorial-diffusion-models.github.io/), 2022; [Siddharth Mishra-Sharma](https://smsharma.io/iaifi-summer-school-2023/), 2023.]
+
+???
+
+In this lecture, we will review the principles of deep generative models from the unified perspective of latent variable models, covering variational auto-encoders, diffusion models, latent diffusion models, and normalizing flows. We will discuss the principles of variational inference, the training of generative models, and the interpretation of the latent space. Selected applications from scientific domains will be presented.
+
+Other models like GANs, energy-based models, and autoregressive models will not be covered in this lecture, but they are also important in the field of deep generative models.
 
 ---
 
@@ -241,14 +251,16 @@ class: middle, black-slide
 
 ???
 
-If we interpret $\mathbf{z}$ as causal factors for the high-dimension representations $\mathbf{x}$, then
-sampling from $p\_\theta(\mathbf{x}|\mathbf{z})$ can be interpreted as **a stochastic generating process** from $\mathcal{Z}$ to $\mathcal{X}$.
+Intuitively, the latent variables $\mathbf{z}$ may represent the hidden factors that exaplain the observed data $\mathbf{x}$.
+
+In the case of the Galton board for instance, the latent variables could represent the random directions of the balls when they hit the pegs and travel down the board. The final observed data $\mathbf{x}$ would be the final positions of the balls, in one of the bins at the bottom of the board.
+
 
 ---
 
 <br><br><br>
 
-## How to fit a latent variable model?
+## How to fit a latent variable model $p\_\theta$?
 
 --
 
@@ -264,7 +276,7 @@ count: false
 
 <br><br><br>
 
-## How to fit a latent variable model?
+## How to fit a latent variable model $p\_\theta$?
 
 $$\begin{aligned}
 \theta^{\*} &= \arg \max\_\theta p\_\theta(\mathbf{x}) \\\\
@@ -456,15 +468,6 @@ Ask me anything!
 ]
 .kol-1-2.center[<iframe src="https://giphy.com/embed/3ohc17IuNgUpALSaIM" width="270" height="480" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>]
 ]
-
----
-
-class: middle, center
-count: false
-
-5-minute break
-
-<iframe src="https://giphy.com/embed/m2zntg8ZJ3Y88" width="480" height="480" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 ---
 
@@ -774,16 +777,6 @@ Ask me anything!
 ]
 .kol-1-2.center.width-100[![](figures/confused.gif)]
 ]
-
----
-
-class: middle, center
-count: false
-
-5-minute break
-
-<iframe src="https://giphy.com/embed/m2zntg8ZJ3Y88" width="480" height="480" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-
 
 ---
 

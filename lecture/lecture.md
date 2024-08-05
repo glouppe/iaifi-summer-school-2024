@@ -132,6 +132,12 @@ A conditional simulator prescribes a way to sample from the likelihood $p(\mathb
 
 ---
 
+class: middle, black-slide
+
+.width-100[![](figures/lhc.gif)]
+
+---
+
 class: middle
 
 $$p(z\_p|\vartheta)$$
@@ -539,6 +545,10 @@ class: middle
 
 .center[![](figures/lec12/diagram-hvae.svg)]
 
+???
+
+Diffusion models are thus yet another instance of a latent variable model, where the latent variables are structured as a Markov chain where each transition is defined by the reverse process, from the final noisified input $\mathbf{z}\_T$ to the original input $\mathbf{x}\_0$.
+
 ---
 
 class: middle
@@ -547,6 +557,10 @@ Similarly to VAEs, training is done by maximizing the ELBO, using a variational 
 $$\begin{aligned}
 \log p\_\theta(\mathbf{x}) &\geq \mathbb{E}\_{q\_\phi(\mathbf{z}\_{1:T} | \mathbf{x})}\left[ \log \frac{p(\mathbf{x},\mathbf{z}\_{1:T})}{q\_\phi(\mathbf{z}\_{1:T}|\mathbf{x})} \right] 
 \end{aligned}$$
+
+???
+
+Except that the variational distribution is now fixed and defined by the forward diffusion process.
 
 ---
 
@@ -678,6 +692,10 @@ $$\begin{aligned}
 \end{aligned}$$
 
 .footnote[Credits: [Kreis et al](https://cvpr2022-tutorial-diffusion-models.github.io/), 2022.]
+
+???
+
+What if we were to consider a continuum of infinitesimal random steps instead of a finite number of discrete steps?
 
 ---
 
